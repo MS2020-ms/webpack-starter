@@ -202,3 +202,18 @@
  -  Crear archivo .gitignore
  -  En terminal >git init  (inicializa proyecto git)
  -  En terminal >git add . (crea punto de recuperacion)
+ -  En terminal >git commit -m "Inicializacion Proyecto" (primer commit) 
+ -  En terminal >git checkout -- . (recupero mi proyecto) 
+
+      #### GitHub
+
+ -  Crear repositorio en GitHub
+ -  En terminal >git remote add origin https://github.com/MS2020-ms/webpack-starter.git
+ -  En terminal >git branch -M main
+ -  En terminal >git push -u origin main
+
+ -  Creo archivo README.md
+ -  Subirlo a GitHub:
+    En terminal >git add . 
+    En terminal >git commit -m " " 
+    En terminal >git push -u origin main
