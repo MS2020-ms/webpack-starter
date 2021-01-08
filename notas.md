@@ -218,7 +218,9 @@
     En terminal >git commit -m "Redame creado " 
     En terminal >git push 
 
-      #### GitHub Pages
+      #### GitHub Pages (hosting de GitHub xa proyectos con html-css-js)
 
 -  Borrar carpeta dist y Ejecuto >npm run build (produccion)
 -  https://github.com/MS2020-ms/webpack-starter/settings -> GitHub Pages 
+
+-  Your site is ready to be published at https://ms2020-ms.github.io/webpack-starter/ 
