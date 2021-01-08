@@ -215,5 +215,10 @@
  -  Creo archivo README.md
  -  Subirlo a GitHub:
     En terminal >git add . 
-    En terminal >git commit -m " " 
-    En terminal >git push -u origin main
+    En terminal >git commit -m "Redame creado " 
+    En terminal >git push 
+
+      #### GitHub Pages
+
+-  Borrar carpeta dist y Ejecuto >npm run build (produccion)
+-  https://github.com/MS2020-ms/webpack-starter/settings -> GitHub Pages 

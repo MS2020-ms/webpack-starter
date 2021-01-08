@@ -6,5 +6,5 @@ import { saludar } from './js/componentes.js';
 import './styles.css';
 
 //const en este archivo solo para navegadores actualizados!!!
-const nombre = 'Mikel';
+const nombre = 'Miguel';
 saludar(nombre);
