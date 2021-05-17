@@ -2,3 +2,7 @@
 html, body{
     background-color: lightgray;
 }
+
+img{
+    width: 150px;
+}

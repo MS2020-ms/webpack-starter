@@ -20,7 +20,11 @@
 
  -  Creo en la raiz un archivo webpack.config.js (se ejecuta cuando lanzo >npm run build)
 
- -  Instalar paquetes desde terminal >npm install --save-dev html-loader html-webpack-plugin
+ -  Instalar paquetes desde terminal versiones actuales a 17.05.2021:
+    >npm install --save-dev html-loader
+    >npm install --save-dev html-loader@2.1.2
+    >npm install --save-dev html-webpack-plugin
+    >npm install --save-dev html-webpack-plugin@5.3.1
     para poder mover el archivo index.html en carpeta dist
     Defino mi archivo webpack.config.js
 
@@ -38,22 +42,27 @@
 
     ####
 
- -  En terminal >npm install -D webpack-dev-server
+    webpack-dev-server:
+ -  Ir https://webpack.js.org/configuration/dev-server/
+ -  >npm install -D webpack-dev-server [-D = --save-dev]
     Paquete que simula un servidor de desarrollo
     Cambios automaticamente compilados y actualizados!
 
  -  En package.json -> "start": "webpack serve"
+    Puedo especificarle otro puerto -> "start": "webpack serve --config webpack.config.js --open --port=4200"
     ### En terminal >npm start (tambien se puede >npm run start).
     ### En navegador ir a http://localhost:8080/ 
-    Puedo especificarle otro puerto -> "start": "webpack serve --port=4200"
 
     [Si da ERROR en terminal => Ejecuto >npm run build y actualizo navegador!]
+    No se crea archivo dist - se guarda en memoria = aplicaciones más rapidas en desarrollo
 
     #### css
 
  -  creo carpeta css y archivo componentes.css
  -  Para aplicar y mover mi archivo css a dist
--  Borrar carpeta dist y Ejecuto >npm run build
+ -  >npm install --save-dev style-loader
+ -  >npm install --save-dev css-loader
+ -  Borrar carpeta dist y Ejecuto >npm run build
     En archivo componentes.js -> import '../css/componentes.css'
     Configuracion de los archivos css -> rules: [{ test: /\.css$/, use: [ 'style-loader','css-loader' ] },
 
@@ -66,7 +75,7 @@
  -  creo archivo styles.css (estilos generales)
  -  importo en index.js -> import './styles.css';
  -  Borrar carpeta dist y Ejecuto >npm run build
- -  Instalo >npm install -D mini-css-extract-plugin 
+ -  >npm install -D mini-css-extract-plugin 
  -  En archivo webpack.config.js configuracion-> 
     const MiniCssExtractPlugin = require('mini-css-extract-plugin');
     {test: /styles\.css$/, use: [ MiniCssExtractPlugin.loader, 'css-loader' ] },
@@ -103,10 +112,10 @@
      #### Imagen
 
  -  creo carpeta assets, guardo imagen y creo img en html     
- -  En terminal >npm install -D file-loader
+ -  >npm install -D file-loader
  -  En archivo webpack.config.js configuracion-> 
 
- -  En terminal >npm install copy-webpack-plugin --save-dev
+ -  >npm install copy-webpack-plugin --save-dev
  -  En archivo webpack.config.js configuracion-> 
     const CopyPlugin = require('copy-webpack-plugin');
     new CopyPlugin({
@@ -215,12 +224,19 @@
  -  Creo archivo README.md
  -  Subirlo a GitHub:
     En terminal >git add . 
-    En terminal >git commit -m "Redame creado " 
+    En terminal >git commit -m "Redame creado" 
     En terminal >git push 
 
       #### GitHub Pages (hosting de GitHub xa proyectos con html-css-js)
 
 -  Borrar carpeta dist y Ejecuto >npm run build (produccion)
+-  Renombrar carpeta dist -> docs
+   En terminal >git status 
+   En terminal >git add . 
+   En terminal >git commit -m "docs creado" 
+   En terminal >git push (subo carpeta docs)
+
 -  https://github.com/MS2020-ms/webpack-starter/settings -> GitHub Pages 
+   Branch: main | /docs | save
 
 -  Your site is ready to be published at https://ms2020-ms.github.io/webpack-starter/ 

@@ -10,6 +10,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     mode: 'development',
+    output: {
+        clean: true
+    },
     optimization: {
         minimizer: [new OptimizeCssAssetsPlugin()]
     },
@@ -17,14 +20,14 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                exclude: /styles\.css$/,
+                exclude: /styles.css$/,
                 use: [
                     'style-loader',
                     'css-loader'
                 ]
             },
             {
-                test: /styles\.css$/,
+                test: /styles.css$/,
                 use: [
                     MiniCssExtractPlugin.loader,
                     'css-loader'
@@ -34,6 +37,7 @@ module.exports = {
                 test: /\.html$/i,
                 loader: 'html-loader',
                 options: {
+                    sources: false,
                     minimize: false,
                     attributes: false,
                 },
@@ -53,14 +57,17 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
+            title: 'Mi Webpack App',
             template: './src/index.html',
+            //opcional:
             filename: './index.html'
         }),
         new MiniCssExtractPlugin({
             //para en 'produccion' prevenir el cache. Este Hash me va a ayudar a prevenir que el navegador mantenga estos archivos en el cache y solo los va a cambiar cuando sea necesario. En 'desarrollo' no lo voy a activar por ahora
             //filename: '[name].[contentHash}.css',
             filename: '[name].css',
-            //para que no nos sigan los guarnings
+
+            //para que no nos sigan los warnings
             ignoreOrder: false
         }),
         new CopyPlugin({
