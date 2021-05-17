@@ -1,88 +1,87 @@
 //Toda la configuracion de produccion
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin'); //{destructuring}
+const HtmlWebpack = require('html-webpack-plugin')
+const MiniCssExtract = require('mini-css-extract-plugin');
+const CopyPlugin = require("copy-webpack-plugin");
+
+const CssMinimizer = require('css-minimizer-webpack-plugin');
+const Terser = require('terser-webpack-plugin');
 
 // mode:'production' -> >npm run build -> minimize y codigo ofuscado
 
+
 module.exports = {
-    mode: 'production',
-    optimization: {
-        minimize: true,
-        minimizer: [new OptimizeCssAssetsPlugin(), new TerserPlugin({
-            test: /\.js(\?.*)?$/i,
-        })],
-    },
+
+    mode: "production",
+
     output: {
+        clean: true,
         //filename: 'main.[contentHash].js', OR 'main.[contenthash].js' OR 'main.[content].js'
         filename: 'main.[contenthash].js'
     },
+
+
     module: {
         rules: [
             {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: [
-                    'babel-loader'
-                ]
+                test: /\.html$/,
+                loader: 'html-loader',
+                options: {
+                    sources: false
+                }
             },
             {
                 test: /\.css$/,
-                exclude: /styles\.css$/,
-                use: [
-                    'style-loader',
-                    'css-loader'
-                ]
+                exclude: /styles.css$/,
+                use: ['style-loader', 'css-loader']
             },
             {
-                test: /styles\.css$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    'css-loader'
-                ]
+                test: /styles.css$/,
+                use: [MiniCssExtract.loader, 'css-loader']
             },
             {
-                test: /\.html$/i,
-                loader: 'html-loader',
-                options: {
-                    minimize: false,
-                    attributes: false,
-                },
+                test: /\.(png|jpe?g|gif)$/,
+                loader: 'file-loader'
             },
             {
-                test: /\.(png|svg|jpg|gif)$/,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            esModule: false
-                        }
+                test: /\.m?js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-env']
                     }
-                ]
+                }
             }
         ]
     },
+
+    optimization: {
+        minimize: true,
+        minimizer: [
+            new CssMinimizer(),
+            new Terser(),
+        ]
+    },
+
     plugins: [
-        new HtmlWebpackPlugin({
-            template: './src/index.html',
-            filename: './index.html'
+        new HtmlWebpack({
+            title: 'Mi Webpack App',
+            // filename: 'index.html',
+            template: './src/index.html'
         }),
-        new MiniCssExtractPlugin({
-            //para en 'produccion' prevenir el cache. Este Hash me va a ayudar a prevenir que el navegador mantenga estos archivos en el cache y solo los va a cambiar cuando sea necesario. En 'desarrollo' no lo voy a activar por ahora
-            //filename: '[name].[contentHash].css', OR '[name].[contenthash].css' OR '[name].[content].css'
-            filename: '[name].[contenthash].css',
-            //para que no nos sigan los guarnings
+
+        new MiniCssExtract({
+            filename: '[name].[fullhash].css',
             ignoreOrder: false
         }),
+
         new CopyPlugin({
             patterns: [
-                { from: 'src/assets', to: 'assets/' },
-            ],
-        }),
-        new CleanWebpackPlugin(),
+                { from: 'src/assets/', to: 'assets/' }
+            ]
+        })
     ]
-};
+}
+
+

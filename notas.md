@@ -92,7 +92,8 @@
  -  El css deberia estar minimizado si lo paso a 'produccion'
     webpack.config.js -> mode: 'production'
  -  Borrar carpeta dist y Ejecuto >npm run build
- -  En terminal >npm install -D optimize-css-assets-webpack-plugin
+ -  >npm install -D optimize-css-assets-webpack-plugin
+    >npm install css-minimizer-webpack-plugin --save-dev
  -  En archivo webpack.config.js configuracion-> 
     const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
     optimization: {

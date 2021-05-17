@@ -7,4 +7,5 @@ import './styles.css';
 
 //const en este archivo solo para navegadores actualizados!!!
 const nombre = 'Miguel';
+
 saludar(nombre);
